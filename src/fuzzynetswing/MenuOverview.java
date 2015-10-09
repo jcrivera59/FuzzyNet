@@ -2,6 +2,8 @@ package fuzzynetswing;
 
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -42,9 +44,9 @@ public class MenuOverview extends javax.swing.JFrame {
 
     //instance Administrator
     Administrador A = new Administrador();
-    
+
     //Combobox value to static variable
-    static String globalNode;        
+    static String globalNode;
 
     ArrayList<String> arrayNodesNames = new ArrayList<String>();
 
@@ -57,6 +59,7 @@ public class MenuOverview extends javax.swing.JFrame {
         initComponents();
         addNode.setEnabled(false);
         System.out.println("Entró a MenuOverview");
+        
     }
 
     public Administrador createNetwork(String nameNetwork) {
@@ -104,6 +107,28 @@ public class MenuOverview extends javax.swing.JFrame {
         panelLayer.updateUI();
 
     }
+    
+    void mouseactionlabel(final JLabel node, final String nameNode) {
+        node.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                System.out.println("El nodo seleccionado es:"+ nameNode);                
+            }
+
+            public void mouseEntered(MouseEvent arg0) {
+            }
+
+            public void mouseExited(MouseEvent arg0) {
+            }
+
+            public void mousePressed(MouseEvent arg0) {
+            }
+
+            public void mouseReleased(MouseEvent arg0) {
+            }
+        });
+    }
+    
 
     public boolean createNode(String nameNode) {
 
@@ -147,14 +172,22 @@ public class MenuOverview extends javax.swing.JFrame {
                     contador1++;
 
                     //pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaa jhoooooooooooooooooooooooooooooooooooooooooooooooooooooooon
-                    for (int y = 0; y < A.getCapas().get(0).getNodos().size(); y++) {
-                        System.out.print(A.getCapas().get(0).getNodos().get(y).getNombreNodo());
-                    }
+//                    for (int y = 0; y < A.getCapas().get(0).getNodos().size(); y++) {
+//                        System.out.print(A.getCapas().get(0).getNodos().get(y).getNombreNodo());
+//                    }
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
                 }
+
+                
+                
+                
             }
+            
+            
 
             //Layout 2            
             if (variable == 2) {
@@ -172,7 +205,11 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     A.getCapas().get(1).anadirNodo(contador2, nameNode);
 
+                    mouseactionlabel(node, nameNode);
+                    
                     contador2++;
+                    
+                    
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -196,6 +233,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(2).anadirNodo(contador3, nameNode);
 
                     contador3++;
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -219,6 +258,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(3).anadirNodo(contador4, nameNode);
 
                     contador4++;
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -242,6 +283,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(4).anadirNodo(contador5, nameNode);
 
                     contador5++;
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -265,6 +308,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(5).anadirNodo(contador6, nameNode);
 
                     contador6++;
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -288,6 +333,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(6).anadirNodo(contador7, nameNode);
 
                     contador7++;
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -311,6 +358,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(7).anadirNodo(contador8, nameNode);
 
                     contador8++;
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -334,6 +383,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(8).anadirNodo(contador9, nameNode);
 
                     contador9++;
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -357,6 +408,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(9).anadirNodo(contador10, nameNode);
 
                     contador10++;
+                    
+                    mouseactionlabel(node, nameNode);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -365,9 +418,9 @@ public class MenuOverview extends javax.swing.JFrame {
 
         }
 
-        for (int xx = 0; xx < variable; xx++) {            
+        for (int xx = 0; xx < variable; xx++) {
             for (int zz = 0; zz < A.getCapas().get(xx).getNodos().size(); zz++) {
-                comboBoxNodes.addItem(A.getCapas().get(xx).getNodos().get(zz).getNombreNodo());                 
+                comboBoxNodes.addItem(A.getCapas().get(xx).getNodos().get(zz).getNombreNodo());
             }
         }
 
@@ -1157,14 +1210,14 @@ public class MenuOverview extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCreateNetworkActionPerformed
 
     private void comboBoxNodesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxNodesActionPerformed
-        
+
     }//GEN-LAST:event_comboBoxNodesActionPerformed
 
     private void DemoNewInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DemoNewInputActionPerformed
         String variableSeleccionada = comboBoxNodes.getSelectedItem().toString();
-        System.out.println("ComboBoxNodes:"+ variableSeleccionada);
+        System.out.println("ComboBoxNodes:" + variableSeleccionada);
         globalNode = variableSeleccionada;
-                  
+
         createInput windowCreateInput = new createInput(this, true);
         windowCreateInput.setLocationRelativeTo(null);
         windowCreateInput.setVisible(true);
