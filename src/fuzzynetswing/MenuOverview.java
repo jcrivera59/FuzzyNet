@@ -42,6 +42,9 @@ public class MenuOverview extends javax.swing.JFrame {
 
     //instance Administrator
     Administrador A = new Administrador();
+    
+    //Combobox value to static variable
+    static String globalNode;        
 
     ArrayList<String> arrayNodesNames = new ArrayList<String>();
 
@@ -60,7 +63,7 @@ public class MenuOverview extends javax.swing.JFrame {
         System.out.println("VARIABLE: " + nameNetwork);
 
         A.setNombreRed(nameNetwork);
-        A.anadirCapa(0);
+
         textNameNetwork.setEnabled(false);
         buttonCreateNetwork.setEnabled(false);
         addNode.setEnabled(true);
@@ -68,6 +71,7 @@ public class MenuOverview extends javax.swing.JFrame {
         return A;
     }
 
+    //Method 
     public void configuration(int x, int y) {
         comboBoxNode.removeAllItems();
         x = 10;
@@ -76,11 +80,15 @@ public class MenuOverview extends javax.swing.JFrame {
         panelLayer.setLayout(new java.awt.GridLayout(x, y));
         Layouts = new JPanel[x][y];
 
+        for (int b = 0; b < x; b++) {
+            A.anadirCapa(b);
+        }
+
         for (int i = 0; i < (x); i++) {
             for (int j = 0; j < (y); j++) {
                 Layouts[i][j] = new JPanel();
                 Layouts[i][j].setLayout(new java.awt.GridLayout(1, 1));
-                Layouts[i][j].setBackground(new java.awt.Color(0, 204 + (i + 10), 255));
+//                Layouts[i][j].setBackground(new java.awt.Color(0, 204 + (i + 10), 255));
                 Border matte = BorderFactory.createMatteBorder(0, 1, 0, 1, Color.BLACK);
                 Layouts[i][j].setBorder(matte);
                 panelLayer.add(Layouts[i][j]);
@@ -92,6 +100,7 @@ public class MenuOverview extends javax.swing.JFrame {
             comboBoxNode.addItem(zz + 1);
 //            comboBoxLayers.addItem(zz + 1);
         }
+
         panelLayer.updateUI();
 
     }
@@ -103,6 +112,8 @@ public class MenuOverview extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "The node already exists");
             return false;
         }
+
+        comboBoxNodes.removeAllItems();
 
         arrayNodesNames.add(nameNode);
 
@@ -122,7 +133,6 @@ public class MenuOverview extends javax.swing.JFrame {
             if (variable == 1) {
                 if (contador1 < 10) {
                     JLabel node = new JLabel();
-
                     node.setIcon(new javax.swing.ImageIcon("C:\\Users\\Juan Camilo\\Documents\\NetBeansProjects\\FuzzyNetSwing\\resources\\images\\Iconos\\Post\\Node.png"));
                     node.setComponentPopupMenu(NodePopup);
                     node.setToolTipText(nameNode);
@@ -157,6 +167,11 @@ public class MenuOverview extends javax.swing.JFrame {
                     Layouts[contador2][variable - 1].add(node);
                     Layouts[contador2][variable - 1].updateUI();
 
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador2);
+
+                    A.getCapas().get(1).anadirNodo(contador2, nameNode);
+
                     contador2++;
 
                 } else {
@@ -174,6 +189,11 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     Layouts[contador3][variable - 1].add(node);
                     Layouts[contador3][variable - 1].updateUI();
+
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador3);
+
+                    A.getCapas().get(2).anadirNodo(contador3, nameNode);
 
                     contador3++;
 
@@ -193,6 +213,11 @@ public class MenuOverview extends javax.swing.JFrame {
                     Layouts[contador4][variable - 1].add(node);
                     Layouts[contador4][variable - 1].updateUI();
 
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador4);
+
+                    A.getCapas().get(3).anadirNodo(contador4, nameNode);
+
                     contador4++;
 
                 } else {
@@ -210,6 +235,11 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     Layouts[contador5][variable - 1].add(node);
                     Layouts[contador5][variable - 1].updateUI();
+
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador5);
+
+                    A.getCapas().get(4).anadirNodo(contador5, nameNode);
 
                     contador5++;
 
@@ -229,6 +259,11 @@ public class MenuOverview extends javax.swing.JFrame {
                     Layouts[contador6][variable - 1].add(node);
                     Layouts[contador6][variable - 1].updateUI();
 
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador6);
+
+                    A.getCapas().get(5).anadirNodo(contador6, nameNode);
+
                     contador6++;
 
                 } else {
@@ -246,6 +281,11 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     Layouts[contador7][variable - 1].add(node);
                     Layouts[contador7][variable - 1].updateUI();
+
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador7);
+
+                    A.getCapas().get(6).anadirNodo(contador7, nameNode);
 
                     contador7++;
 
@@ -265,6 +305,11 @@ public class MenuOverview extends javax.swing.JFrame {
                     Layouts[contador8][variable - 1].add(node);
                     Layouts[contador8][variable - 1].updateUI();
 
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador8);
+
+                    A.getCapas().get(7).anadirNodo(contador8, nameNode);
+
                     contador8++;
 
                 } else {
@@ -282,6 +327,11 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     Layouts[contador9][variable - 1].add(node);
                     Layouts[contador9][variable - 1].updateUI();
+
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador9);
+
+                    A.getCapas().get(8).anadirNodo(contador9, nameNode);
 
                     contador9++;
 
@@ -301,6 +351,11 @@ public class MenuOverview extends javax.swing.JFrame {
                     Layouts[contador10][variable - 1].add(node);
                     Layouts[contador10][variable - 1].updateUI();
 
+                    System.out.println("CAPA:" + variable);
+                    System.out.println("ROW:" + contador10);
+
+                    A.getCapas().get(9).anadirNodo(contador10, nameNode);
+
                     contador10++;
 
                 } else {
@@ -308,6 +363,12 @@ public class MenuOverview extends javax.swing.JFrame {
                 }
             }
 
+        }
+
+        for (int xx = 0; xx < variable; xx++) {            
+            for (int zz = 0; zz < A.getCapas().get(xx).getNodos().size(); zz++) {
+                comboBoxNodes.addItem(A.getCapas().get(xx).getNodos().get(zz).getNombreNodo());                 
+            }
         }
 
         return true;
@@ -323,12 +384,15 @@ public class MenuOverview extends javax.swing.JFrame {
     private void initComponents() {
 
         NodePopup = new javax.swing.JPopupMenu();
+        InputPopUp = new javax.swing.JMenu();
         NodeFuzzify = new javax.swing.JMenuItem();
+        NewInput = new javax.swing.JMenuItem();
+        OutputPopUp = new javax.swing.JMenu();
         NodeDefuzzify = new javax.swing.JMenuItem();
+        NewOutput = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         Methods = new javax.swing.JMenuItem();
         Rules = new javax.swing.JMenuItem();
-        layers = new javax.swing.ButtonGroup();
         PanelToolbar = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         New = new javax.swing.JButton();
@@ -343,6 +407,9 @@ public class MenuOverview extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JToolBar.Separator();
         textNameNetwork = new javax.swing.JTextField();
         buttonCreateNetwork = new javax.swing.JButton();
+        comboBoxNodes = new javax.swing.JComboBox();
+        DemoNewInput = new javax.swing.JButton();
+        DemoNewOutput = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         PanelInputs = new javax.swing.JPanel();
         newInputButton = new javax.swing.JButton();
@@ -391,21 +458,45 @@ public class MenuOverview extends javax.swing.JFrame {
 
         NodePopup.setComponentPopupMenu(NodePopup);
 
-        NodeFuzzify.setText("Fuzzify");
+        InputPopUp.setText("Input");
+
+        NodeFuzzify.setText("Edit Input");
         NodeFuzzify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NodeFuzzifyActionPerformed(evt);
             }
         });
-        NodePopup.add(NodeFuzzify);
+        InputPopUp.add(NodeFuzzify);
 
-        NodeDefuzzify.setText("Defuzzify");
+        NewInput.setText("New Input");
+        NewInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewInputActionPerformed(evt);
+            }
+        });
+        InputPopUp.add(NewInput);
+
+        NodePopup.add(InputPopUp);
+
+        OutputPopUp.setText("Output");
+
+        NodeDefuzzify.setText("Edit Output");
         NodeDefuzzify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NodeDefuzzifyActionPerformed(evt);
             }
         });
-        NodePopup.add(NodeDefuzzify);
+        OutputPopUp.add(NodeDefuzzify);
+
+        NewOutput.setText("New Output");
+        NewOutput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewOutputActionPerformed(evt);
+            }
+        });
+        OutputPopUp.add(NewOutput);
+
+        NodePopup.add(OutputPopUp);
         NodePopup.add(jSeparator2);
 
         Methods.setText("Methods");
@@ -532,6 +623,32 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         jToolBar1.add(buttonCreateNetwork);
 
+        comboBoxNodes.setMaximumSize(new java.awt.Dimension(100, 20));
+        comboBoxNodes.setMinimumSize(new java.awt.Dimension(50, 20));
+        comboBoxNodes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxNodesActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(comboBoxNodes);
+
+        DemoNewInput.setText("New Input");
+        DemoNewInput.setFocusable(false);
+        DemoNewInput.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        DemoNewInput.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        DemoNewInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DemoNewInputActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(DemoNewInput);
+
+        DemoNewOutput.setText("New Output");
+        DemoNewOutput.setFocusable(false);
+        DemoNewOutput.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        DemoNewOutput.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(DemoNewOutput);
+
         javax.swing.GroupLayout PanelToolbarLayout = new javax.swing.GroupLayout(PanelToolbar);
         PanelToolbar.setLayout(PanelToolbarLayout);
         PanelToolbarLayout.setHorizontalGroup(
@@ -543,7 +660,7 @@ public class MenuOverview extends javax.swing.JFrame {
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        newInputButton.setBackground(new java.awt.Color(255, 51, 51));
+        newInputButton.setBackground(new java.awt.Color(0, 0, 0));
         newInputButton.setText("New Input");
         newInputButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -574,7 +691,7 @@ public class MenuOverview extends javax.swing.JFrame {
                 .addComponent(newInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        newOutputButton.setBackground(new java.awt.Color(255, 51, 51));
+        newOutputButton.setBackground(new java.awt.Color(0, 0, 0));
         newOutputButton.setText("New output");
         newOutputButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -651,7 +768,6 @@ public class MenuOverview extends javax.swing.JFrame {
 
         ManageLayouts.setText("Manage Layouts");
 
-        layers.add(layer1);
         layer1.setSelected(true);
         layer1.setText("1 Layers");
         layer1.addActionListener(new java.awt.event.ActionListener() {
@@ -661,7 +777,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer1);
 
-        layers.add(layer2);
         layer2.setText("2 Layers");
         layer2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -670,7 +785,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer2);
 
-        layers.add(layer3);
         layer3.setText("3 Layers");
         layer3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -679,7 +793,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer3);
 
-        layers.add(layer4);
         layer4.setText("4 Layers");
         layer4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -688,7 +801,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer4);
 
-        layers.add(layer5);
         layer5.setText("5 Layers");
         layer5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -697,7 +809,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer5);
 
-        layers.add(layer6);
         layer6.setText("6 Layers");
         layer6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -706,7 +817,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer6);
 
-        layers.add(layer7);
         layer7.setText("7 Layers");
         layer7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -715,7 +825,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer7);
 
-        layers.add(layer8);
         layer8.setText("8 Layers");
         layer8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -724,7 +833,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer8);
 
-        layers.add(layer9);
         layer9.setText("9 Layers");
         layer9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -733,7 +841,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         ManageLayouts.add(layer9);
 
-        layers.add(layer10);
         layer10.setText("10 Layers");
         layer10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -907,14 +1014,6 @@ public class MenuOverview extends javax.swing.JFrame {
         windowVLInputNet.setVisible(true);
     }//GEN-LAST:event_NodeFuzzifyActionPerformed
 
-    //ActionPerformed button for the new output to the node
-    private void NodeDefuzzifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodeDefuzzifyActionPerformed
-        // TODO add your handling code here:
-        createVLOutputNet windowVLOutputNet = new createVLOutputNet(this, true);
-        windowVLOutputNet.setLocationRelativeTo(null);
-        windowVLOutputNet.setVisible(true);
-    }//GEN-LAST:event_NodeDefuzzifyActionPerformed
-
     //ActionPerformed button for configure the node methods
     private void MethodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MethodsActionPerformed
         // TODO add your handling code here:
@@ -936,8 +1035,8 @@ public class MenuOverview extends javax.swing.JFrame {
         // TODO add your handling code here:
         createVLInputNet windowVLInputNet = new createVLInputNet(this, true);
         windowVLInputNet.setLocationRelativeTo(null);
-        windowVLInputNet.setVisible(true);           
-                
+        windowVLInputNet.setVisible(true);
+
 
     }//GEN-LAST:event_newInputButtonActionPerformed
 
@@ -952,9 +1051,9 @@ public class MenuOverview extends javax.swing.JFrame {
     //ActionPerformed button for new real values to simulate the node. 
     private void ButtonSimulateNodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSimulateNodeActionPerformed
         // TODO add your handling code here:
-        realValuesNode realValuesNode = new realValuesNode();
-        realValuesNode.setLocationRelativeTo(null);
-        realValuesNode.setVisible(true);
+        realValuesNodes windowRealValuesNodes = new realValuesNodes(this, true);
+        windowRealValuesNodes.setLocationRelativeTo(null);
+        windowRealValuesNodes.setVisible(true);
     }//GEN-LAST:event_ButtonSimulateNodeActionPerformed
 
     private void layer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layer1ActionPerformed
@@ -1024,6 +1123,32 @@ public class MenuOverview extends javax.swing.JFrame {
         // TODO add your handling code here:        
     }//GEN-LAST:event_textNameNodeKeyTyped
 
+    private void RulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RulesActionPerformed
+        rules windowRules = new rules(this, true);
+        windowRules.setLocationRelativeTo(null);
+        windowRules.setVisible(true);
+    }//GEN-LAST:event_RulesActionPerformed
+
+    //ActionPerformed button for the new output to the node
+    private void NodeDefuzzifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodeDefuzzifyActionPerformed
+        // TODO add your handling code here:
+        createVLOutputNet windowVLOutputNet = new createVLOutputNet(this, true);
+        windowVLOutputNet.setLocationRelativeTo(null);
+        windowVLOutputNet.setVisible(true);
+    }//GEN-LAST:event_NodeDefuzzifyActionPerformed
+
+    private void NewInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewInputActionPerformed
+        createInput windowCreateInput = new createInput(this, true);
+        windowCreateInput.setLocationRelativeTo(null);
+        windowCreateInput.setVisible(true);
+    }//GEN-LAST:event_NewInputActionPerformed
+
+    private void NewOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewOutputActionPerformed
+        createOutput windowCreateOutput = new createOutput(this, true);
+        windowCreateOutput.setLocationRelativeTo(null);
+        windowCreateOutput.setVisible(true);
+    }//GEN-LAST:event_NewOutputActionPerformed
+
     private void buttonCreateNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCreateNetworkActionPerformed
         // TODO add your handling code here:
         String nameNetwork;
@@ -1031,11 +1156,19 @@ public class MenuOverview extends javax.swing.JFrame {
         createNetwork(nameNetwork);
     }//GEN-LAST:event_buttonCreateNetworkActionPerformed
 
-    private void RulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RulesActionPerformed
-        rules windowRules = new rules(this, true);
-        windowRules.setLocationRelativeTo(null);
-        windowRules.setVisible(true);
-    }//GEN-LAST:event_RulesActionPerformed
+    private void comboBoxNodesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxNodesActionPerformed
+        
+    }//GEN-LAST:event_comboBoxNodesActionPerformed
+
+    private void DemoNewInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DemoNewInputActionPerformed
+        String variableSeleccionada = comboBoxNodes.getSelectedItem().toString();
+        System.out.println("ComboBoxNodes:"+ variableSeleccionada);
+        globalNode = variableSeleccionada;
+                  
+        createInput windowCreateInput = new createInput(this, true);
+        windowCreateInput.setLocationRelativeTo(null);
+        windowCreateInput.setVisible(true);
+    }//GEN-LAST:event_DemoNewInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1079,6 +1212,8 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JMenuItem DeffuzifyDelete;
     private javax.swing.JMenuItem DeffuzifyEdit;
     private javax.swing.JMenu Defuzzify;
+    private javax.swing.JButton DemoNewInput;
+    private javax.swing.JButton DemoNewOutput;
     private javax.swing.JMenuItem EditAboutUs;
     private javax.swing.JMenuItem EditOperatorsManual;
     private javax.swing.JMenuItem EditUserManual;
@@ -1093,11 +1228,14 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JMenuItem FuzzifyDelete;
     private javax.swing.JMenuItem FuzzifyEdit;
     private javax.swing.JMenu Help;
+    private javax.swing.JMenu InputPopUp;
     private javax.swing.JMenu Layer;
     private javax.swing.JMenu ManageLayouts;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenuItem Methods;
     private javax.swing.JButton New;
+    private javax.swing.JMenuItem NewInput;
+    private javax.swing.JMenuItem NewOutput;
     private javax.swing.JMenu Node;
     private javax.swing.JMenuItem NodeCreate;
     private javax.swing.JMenuItem NodeDefuzzify;
@@ -1106,6 +1244,7 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JMenuItem NodeFuzzify;
     private javax.swing.JPopupMenu NodePopup;
     private javax.swing.JButton Open;
+    private javax.swing.JMenu OutputPopUp;
     private javax.swing.JPanel PanelInputs;
     private javax.swing.JPanel PanelOutputs;
     private javax.swing.JPanel PanelToolbar;
@@ -1114,6 +1253,7 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JButton addNode;
     private javax.swing.JButton buttonCreateNetwork;
     private javax.swing.JComboBox comboBoxNode;
+    private javax.swing.JComboBox comboBoxNodes;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JSeparator jSeparator1;
@@ -1133,7 +1273,6 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem layer7;
     private javax.swing.JRadioButtonMenuItem layer8;
     private javax.swing.JRadioButtonMenuItem layer9;
-    private javax.swing.ButtonGroup layers;
     private javax.swing.JButton newInputButton;
     private javax.swing.JButton newOutputButton;
     public static javax.swing.JPanel panelLayer;

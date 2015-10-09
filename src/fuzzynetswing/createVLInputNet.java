@@ -5,6 +5,8 @@
  */
 package fuzzynetswing;
 
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Juan Camilo
@@ -14,10 +16,9 @@ public class createVLInputNet extends javax.swing.JDialog {
     /**
      * Creates new form createVLInputNet
      */
-    
     //Instance of the parent window
-    private MenuOverview principalWindow = (MenuOverview)this.getParent();
-    
+    private MenuOverview principalWindow = (MenuOverview) this.getParent();
+
     public createVLInputNet(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,11 +34,11 @@ public class createVLInputNet extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         fuzzifier = new javax.swing.JTextField();
-        textName = new javax.swing.JTextField();
         buttonGraph = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        variablesComboBox = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -54,9 +55,7 @@ public class createVLInputNet extends javax.swing.JDialog {
         okButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
-        setTitle("New Input");
-
-        jLabel1.setText("Name:");
+        setTitle("Edit Input");
 
         jLabel2.setText("Fuzzifier:");
 
@@ -69,48 +68,63 @@ public class createVLInputNet extends javax.swing.JDialog {
         });
 
         buttonGraph.setText("Graph");
+        buttonGraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGraphActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Variables");
+
+        variablesComboBox.setEditable(true);
+        variablesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hola", "Adios" }));
+        variablesComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                variablesComboBoxMouseClicked(evt);
+            }
+        });
+        variablesComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                variablesComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(variablesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(208, 208, 208)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fuzzifier, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addComponent(buttonGraph)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonGraph)
+                .addGap(209, 209, 209))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(fuzzifier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(variablesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(buttonGraph)
-                .addGap(21, 21, 21))
+                .addGap(23, 23, 23))
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Linguistic Qualifiers");
 
-        listLinguisticQualifiers.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "LQ 1", "LQ 2", "LQ 3", " " };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(listLinguisticQualifiers);
 
         newLQButton.setText("New LQ");
@@ -166,11 +180,11 @@ public class createVLInputNet extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(newLQButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteLQButton)))
+                        .addComponent(deleteLQButton))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -265,6 +279,29 @@ public class createVLInputNet extends javax.swing.JDialog {
         windowNewLQ.setVisible(true);
     }//GEN-LAST:event_newLQButtonActionPerformed
 
+    private void buttonGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGraphActionPerformed
+
+        
+//        String variableLista = listLinguisticQualifiers.getSelectedValue().toString();
+
+
+    }//GEN-LAST:event_buttonGraphActionPerformed
+
+    private void variablesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_variablesComboBoxActionPerformed
+        String variableSeleccionada = variablesComboBox.getSelectedItem().toString();
+        System.out.println("Algo:"+ variableSeleccionada);
+         DefaultListModel modelo = new DefaultListModel();
+        for (int i = 1; i <= 2; i++) {
+            modelo.addElement(variableSeleccionada);
+        }
+        listLinguisticQualifiers.setModel(modelo);
+        
+    }//GEN-LAST:event_variablesComboBoxActionPerformed
+
+    private void variablesComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_variablesComboBoxMouseClicked
+
+    }//GEN-LAST:event_variablesComboBoxMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -314,11 +351,11 @@ public class createVLInputNet extends javax.swing.JDialog {
     private javax.swing.JButton deleteLQButton;
     private javax.swing.JTextField fuzzifier;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
@@ -328,6 +365,6 @@ public class createVLInputNet extends javax.swing.JDialog {
     private javax.swing.JList listLinguisticQualifiers;
     private javax.swing.JButton newLQButton;
     private javax.swing.JButton okButton;
-    private javax.swing.JTextField textName;
+    private javax.swing.JComboBox variablesComboBox;
     // End of variables declaration//GEN-END:variables
 }
