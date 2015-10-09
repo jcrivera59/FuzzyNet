@@ -43,10 +43,9 @@ public class MenuOverview extends javax.swing.JFrame {
     int contador10 = 0;
 
     //instance Administrator
-    Administrador A = new Administrador();
+    static Administrador A = new Administrador();
 
-    //Combobox value to static variable
-    static String globalNode;
+    //Combobox value to static variable    
 
     ArrayList<String> arrayNodesNames = new ArrayList<String>();
 
@@ -108,11 +107,17 @@ public class MenuOverview extends javax.swing.JFrame {
 
     }
     
-    void mouseactionlabel(final JLabel node, final String nameNode) {
+    void mouseactionlabel(final JLabel node, final String nameNode, final int posX, final int posY) {
         node.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 System.out.println("El nodo seleccionado es:"+ nameNode);                
+                System.out.println("PosX:"+ posX+ "PosY:" +posY);                
+                A.setPosX(posX);
+                A.setPosY(posY);
+                A.setNameNodeSeleccionado(nameNode);
+                System.out.println("Admin Name Node:"+ nameNode);                
+                System.out.println("Admin PosX:"+ posX+ "PosY:" +posY);                
             }
 
             public void mouseEntered(MouseEvent arg0) {
@@ -137,8 +142,6 @@ public class MenuOverview extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "The node already exists");
             return false;
         }
-
-        comboBoxNodes.removeAllItems();
 
         arrayNodesNames.add(nameNode);
 
@@ -176,15 +179,12 @@ public class MenuOverview extends javax.swing.JFrame {
 //                        System.out.print(A.getCapas().get(0).getNodos().get(y).getNombreNodo());
 //                    }
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode, variable-1, contador1);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
                 }
 
-                
-                
-                
             }
             
             
@@ -204,12 +204,10 @@ public class MenuOverview extends javax.swing.JFrame {
                     System.out.println("ROW:" + contador2);
 
                     A.getCapas().get(1).anadirNodo(contador2, nameNode);
-
-                    mouseactionlabel(node, nameNode);
                     
                     contador2++;
                     
-                    
+                    mouseactionlabel(node, nameNode, variable-1, contador2);                                        
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -234,7 +232,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     contador3++;
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode, variable-1, contador3);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -259,7 +257,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     contador4++;
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode, variable-1, contador4);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -284,7 +282,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     contador5++;
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode, variable-1, contador5);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -309,7 +307,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     contador6++;
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode, variable-1, contador6);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -334,7 +332,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     contador7++;
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode, variable-1, contador7);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -359,7 +357,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     contador8++;
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode, variable-1, contador8);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -384,7 +382,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     contador9++;
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode,  variable-1, contador9);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -409,7 +407,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     contador10++;
                     
-                    mouseactionlabel(node, nameNode);
+                    mouseactionlabel(node, nameNode, variable-1, contador10);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -418,11 +416,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
         }
 
-        for (int xx = 0; xx < variable; xx++) {
-            for (int zz = 0; zz < A.getCapas().get(xx).getNodos().size(); zz++) {
-                comboBoxNodes.addItem(A.getCapas().get(xx).getNodos().get(zz).getNombreNodo());
-            }
-        }
+        
 
         return true;
     }
@@ -460,9 +454,6 @@ public class MenuOverview extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JToolBar.Separator();
         textNameNetwork = new javax.swing.JTextField();
         buttonCreateNetwork = new javax.swing.JButton();
-        comboBoxNodes = new javax.swing.JComboBox();
-        DemoNewInput = new javax.swing.JButton();
-        DemoNewOutput = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         PanelInputs = new javax.swing.JPanel();
         newInputButton = new javax.swing.JButton();
@@ -675,32 +666,6 @@ public class MenuOverview extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(buttonCreateNetwork);
-
-        comboBoxNodes.setMaximumSize(new java.awt.Dimension(100, 20));
-        comboBoxNodes.setMinimumSize(new java.awt.Dimension(50, 20));
-        comboBoxNodes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxNodesActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(comboBoxNodes);
-
-        DemoNewInput.setText("New Input");
-        DemoNewInput.setFocusable(false);
-        DemoNewInput.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        DemoNewInput.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        DemoNewInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DemoNewInputActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(DemoNewInput);
-
-        DemoNewOutput.setText("New Output");
-        DemoNewOutput.setFocusable(false);
-        DemoNewOutput.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        DemoNewOutput.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(DemoNewOutput);
 
         javax.swing.GroupLayout PanelToolbarLayout = new javax.swing.GroupLayout(PanelToolbar);
         PanelToolbar.setLayout(PanelToolbarLayout);
@@ -1209,20 +1174,6 @@ public class MenuOverview extends javax.swing.JFrame {
         createNetwork(nameNetwork);
     }//GEN-LAST:event_buttonCreateNetworkActionPerformed
 
-    private void comboBoxNodesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxNodesActionPerformed
-
-    }//GEN-LAST:event_comboBoxNodesActionPerformed
-
-    private void DemoNewInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DemoNewInputActionPerformed
-        String variableSeleccionada = comboBoxNodes.getSelectedItem().toString();
-        System.out.println("ComboBoxNodes:" + variableSeleccionada);
-        globalNode = variableSeleccionada;
-
-        createInput windowCreateInput = new createInput(this, true);
-        windowCreateInput.setLocationRelativeTo(null);
-        windowCreateInput.setVisible(true);
-    }//GEN-LAST:event_DemoNewInputActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1265,8 +1216,6 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JMenuItem DeffuzifyDelete;
     private javax.swing.JMenuItem DeffuzifyEdit;
     private javax.swing.JMenu Defuzzify;
-    private javax.swing.JButton DemoNewInput;
-    private javax.swing.JButton DemoNewOutput;
     private javax.swing.JMenuItem EditAboutUs;
     private javax.swing.JMenuItem EditOperatorsManual;
     private javax.swing.JMenuItem EditUserManual;
@@ -1306,7 +1255,6 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JButton addNode;
     private javax.swing.JButton buttonCreateNetwork;
     private javax.swing.JComboBox comboBoxNode;
-    private javax.swing.JComboBox comboBoxNodes;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JSeparator jSeparator1;

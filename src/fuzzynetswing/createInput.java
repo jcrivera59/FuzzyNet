@@ -5,8 +5,11 @@
  */
 package fuzzynetswing;
 
-import static fuzzynetswing.MenuOverview.globalNode;
+
+import static fuzzynetswing.MenuOverview.A;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,7 +26,7 @@ public class createInput extends javax.swing.JDialog {
     public createInput(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        nameVariable.setText(globalNode);
+        nameNode.setText(A.getNameNodeSeleccionado());        
     }
 
     /**
@@ -41,6 +44,8 @@ public class createInput extends javax.swing.JDialog {
         buttonGraph = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         nameVariable = new javax.swing.JTextField();
+        nameNode = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -49,10 +54,10 @@ public class createInput extends javax.swing.JDialog {
         deleteLQButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         LQName = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        comboBoxMembershipFunction = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableParameters = new javax.swing.JTable();
         cancelButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -78,37 +83,55 @@ public class createInput extends javax.swing.JDialog {
 
         jLabel6.setText("Variables");
 
-        nameVariable.setEditable(false);
+        nameVariable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameVariableActionPerformed(evt);
+            }
+        });
+
+        nameNode.setEditable(false);
+
+        jLabel1.setText("Node");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameVariable, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fuzzifier, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonGraph)
-                .addGap(209, 209, 209))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameVariable, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nameNode, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fuzzifier, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonGraph)
+                        .addGap(209, 209, 209))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(fuzzifier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(nameVariable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(nameVariable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addComponent(nameNode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(fuzzifier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(buttonGraph)
                 .addGap(23, 23, 23))
         );
@@ -129,15 +152,20 @@ public class createInput extends javax.swing.JDialog {
 
         jLabel4.setText("Name LQ: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Triangular", "Trapetzoidal", "Gauss", "Generalized bell", "Sigmoidal", "Singleton", "Piece-wise linear" }));
+        comboBoxMembershipFunction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Triangular", "Trapetzoidal", "Gauss", "Generalized bell", "Sigmoidal", "Singleton", "Piece-wise linear" }));
+        comboBoxMembershipFunction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxMembershipFunctionActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Membership Function: ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableParameters.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
+                {"", null},
+                {"", null},
+                {"", null},
                 {null, null},
                 {null, null},
                 {null, null},
@@ -150,8 +178,26 @@ public class createInput extends javax.swing.JDialog {
             new String [] {
                 "Parameter", "Value"
             }
-        ));
-        jScrollPane3.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tableParameters);
+        if (tableParameters.getColumnModel().getColumnCount() > 0) {
+            tableParameters.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         cancelButton.setText("Cancel");
         cancelButton.setToolTipText("");
@@ -192,16 +238,17 @@ public class createInput extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LQName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(comboBoxMembershipFunction, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 38, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(13, 13, 13))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(okButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cancelButton)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addComponent(okButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                                        .addComponent(cancelButton)))
                                 .addGap(31, 31, 31)))))
                 .addContainerGap())
         );
@@ -222,12 +269,12 @@ public class createInput extends javax.swing.JDialog {
                                 .addComponent(LQName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBoxMembershipFunction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5)))
                             .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
+                        .addGap(13, 13, 13)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelButton)
                             .addComponent(okButton))
@@ -243,10 +290,9 @@ public class createInput extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jSeparator1))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,6 +307,35 @@ public class createInput extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void parametersMembershipFunction(String MQ){
+        
+        DefaultTableModel modelTableParameters = new DefaultTableModel();        
+        
+        modelTableParameters.addColumn("Parameters");
+        modelTableParameters.addColumn("Values");
+        String texto = null;
+        
+        if(MQ == "Triangular"){
+//            JOptionPane.showMessageDialog(this, "Esta llegando: "+MQ);
+        
+            modelTableParameters.addRow(new Object[]{"A:","0.0"});
+            modelTableParameters.addRow(new Object[]{"B:","0.0"});
+            modelTableParameters.addRow(new Object[]{"C:","0.0"});
+            
+            int cols = modelTableParameters.getColumnCount();
+            int rows = modelTableParameters.getRowCount();
+            
+            System.out.println("Cols: "+cols);
+            System.out.println("Rows: "+rows);
+            
+            
+//        modelTableParameters.addRow(filas);
+        
+        tableParameters.setModel(modelTableParameters);
+        }
+    }
+    
     private void fuzzifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuzzifierActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fuzzifierActionPerformed
@@ -271,9 +346,11 @@ public class createInput extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void newLQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLQButtonActionPerformed
-        newLQInput windowNewLQ = new newLQInput(this, true);
-        windowNewLQ.setLocationRelativeTo(null);
-        windowNewLQ.setVisible(true);
+        A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY()).agregarVariableEntrada(nameVariable.getText());
+        
+//        newLQInput windowNewLQ = new newLQInput(this, true);
+//        windowNewLQ.setLocationRelativeTo(null);
+//        windowNewLQ.setVisible(true);
     }//GEN-LAST:event_newLQButtonActionPerformed
 
     private void buttonGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGraphActionPerformed
@@ -285,15 +362,19 @@ public class createInput extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonGraphActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-//        for(int p=0; p<A.getCapas().size(); p++){
-//            for(int g=0; g<A.getCapas().get(p).getNodos().size(); g ++){
-//            if(A.getCapas().get(p).getNodos().get(g).getNombreNodo().equals(variableSeleccionada)){
-//              A.getCapas().get(p).getNodos().get(g).agregarVariableEntrada(globalNode);
-//            }
-//            
-//            }
-//         }      
+        A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY()).agregarVariableEntrada(nameVariable.getText());
+        dispose();
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void nameVariableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameVariableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameVariableActionPerformed
+
+    private void comboBoxMembershipFunctionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMembershipFunctionActionPerformed
+        String FQSelected = comboBoxMembershipFunction.getSelectedItem().toString();
+        System.out.println("Algo:"+ FQSelected);        
+        parametersMembershipFunction(FQSelected);
+    }//GEN-LAST:event_comboBoxMembershipFunctionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,9 +423,10 @@ public class createInput extends javax.swing.JDialog {
     private javax.swing.JTextField LQName;
     private javax.swing.JButton buttonGraph;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JComboBox comboBoxMembershipFunction;
     private javax.swing.JButton deleteLQButton;
     private javax.swing.JTextField fuzzifier;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -355,10 +437,11 @@ public class createInput extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JList listLinguisticQualifiers;
+    private javax.swing.JTextField nameNode;
     private javax.swing.JTextField nameVariable;
     private javax.swing.JButton newLQButton;
     private javax.swing.JButton okButton;
+    private javax.swing.JTable tableParameters;
     // End of variables declaration//GEN-END:variables
 }

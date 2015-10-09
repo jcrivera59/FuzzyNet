@@ -143,9 +143,6 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer1">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="1 Layers"/>
                   </Properties>
@@ -155,9 +152,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer2">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="2 Layers"/>
                   </Properties>
                   <Events>
@@ -166,9 +160,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer3">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="3 Layers"/>
                   </Properties>
                   <Events>
@@ -177,9 +168,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer4">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="4 Layers"/>
                   </Properties>
                   <Events>
@@ -188,9 +176,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer5">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="5 Layers"/>
                   </Properties>
                   <Events>
@@ -199,9 +184,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer6">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="6 Layers"/>
                   </Properties>
                   <Events>
@@ -210,9 +192,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer7">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="7 Layers"/>
                   </Properties>
                   <Events>
@@ -221,9 +200,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer8">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="8 Layers"/>
                   </Properties>
                   <Events>
@@ -232,9 +208,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer9">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="9 Layers"/>
                   </Properties>
                   <Events>
@@ -243,9 +216,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="layer10">
                   <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="default"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="10 Layers"/>
                   </Properties>
                   <Events>
@@ -610,41 +580,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCreateNetworkActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="comboBoxNodes">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[100, 20]"/>
-                </Property>
-                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[50, 20]"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxNodesActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="DemoNewInput">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="New Input"/>
-                <Property name="focusable" type="boolean" value="false"/>
-                <Property name="horizontalTextPosition" type="int" value="0"/>
-                <Property name="verticalTextPosition" type="int" value="3"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DemoNewInputActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="DemoNewOutput">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="New Output"/>
-                <Property name="focusable" type="boolean" value="false"/>
-                <Property name="horizontalTextPosition" type="int" value="0"/>
-                <Property name="verticalTextPosition" type="int" value="3"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
