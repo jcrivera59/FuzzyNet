@@ -5,11 +5,13 @@
  */
 package fuzzynetswing;
 
-
 import static fuzzynetswing.MenuOverview.A;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.VL;
+import model.variableLinguistica;
 
 /**
  *
@@ -21,12 +23,15 @@ public class createInput extends javax.swing.JDialog {
      * Creates new form createVLInputNet
      */
     //Instance of the parent window
+    
+    ArrayList<String> arrayParameters = new ArrayList<String>();        
+    
     private MenuOverview principalWindow = (MenuOverview) this.getParent();
 
     public createInput(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        nameNode.setText(A.getNameNodeSeleccionado());        
+        nameNode.setText(A.getNameNodeSeleccionado());
     }
 
     /**
@@ -152,7 +157,7 @@ public class createInput extends javax.swing.JDialog {
 
         jLabel4.setText("Name LQ: ");
 
-        comboBoxMembershipFunction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Triangular", "Trapetzoidal", "Gauss", "Generalized bell", "Sigmoidal", "Singleton", "Piece-wise linear" }));
+        comboBoxMembershipFunction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Triangular", "Trapetzoidal", "Gauss", "Generalized bell", "Sigmoidal", "Gaussian double", "Cosine", "Difference of sigmoidals", "Piece-wise linear" }));
         comboBoxMembershipFunction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxMembershipFunctionActionPerformed(evt);
@@ -307,35 +312,196 @@ public class createInput extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void parametersMembershipFunction(String MQ){
-        
-        DefaultTableModel modelTableParameters = new DefaultTableModel();        
-        
+    public void parametersMembershipFunction(String MQ) {
+
+        DefaultTableModel modelTableParameters = new DefaultTableModel();
+
         modelTableParameters.addColumn("Parameters");
         modelTableParameters.addColumn("Values");
         String texto = null;
-        
-        if(MQ == "Triangular"){
-//            JOptionPane.showMessageDialog(this, "Esta llegando: "+MQ);
-        
-            modelTableParameters.addRow(new Object[]{"A:","0.0"});
-            modelTableParameters.addRow(new Object[]{"B:","0.0"});
-            modelTableParameters.addRow(new Object[]{"C:","0.0"});
-            
+
+        if (MQ == "Triangular") {
+            arrayParameters.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"C:", "0.0"});
+
             int cols = modelTableParameters.getColumnCount();
             int rows = modelTableParameters.getRowCount();
-            
-            System.out.println("Cols: "+cols);
-            System.out.println("Rows: "+rows);
-            
-            
-//        modelTableParameters.addRow(filas);
+
+            System.out.println("Cols: " + cols);
+            System.out.println("Rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(modelTableParameters.getValueAt(i, j));
+                    System.out.println();
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                }
+            }
+            tableParameters.setModel(modelTableParameters);
+            }
+                
         
-        tableParameters.setModel(modelTableParameters);
-        }
+
+        if (MQ == "Trapetzoidal") {
+            arrayParameters.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"C:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"D:", "0.0"});
+
+            int cols = modelTableParameters.getColumnCount();
+            int rows = modelTableParameters.getRowCount();
+
+            System.out.println("Cols: " + cols);
+            System.out.println("Rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(modelTableParameters.getValueAt(i, j));
+                    System.out.println();
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                }
+            }
+            tableParameters.setModel(modelTableParameters);
+            }
+        
+        if (MQ == "Gauss") {
+            arrayParameters.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});
+
+            int cols = modelTableParameters.getColumnCount();
+            int rows = modelTableParameters.getRowCount();
+
+            System.out.println("Cols: " + cols);
+            System.out.println("Rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(modelTableParameters.getValueAt(i, j));
+                    System.out.println();
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                }
+            }
+            tableParameters.setModel(modelTableParameters);
+            }
+        
+        if (MQ == "Generalized bell") {
+            arrayParameters.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"C:", "0.0"});
+
+            int cols = modelTableParameters.getColumnCount();
+            int rows = modelTableParameters.getRowCount();
+
+            System.out.println("Cols: " + cols);
+            System.out.println("Rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(modelTableParameters.getValueAt(i, j));
+                    System.out.println();
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                }
+            }
+            tableParameters.setModel(modelTableParameters);
+            }
+        
+        
+        if (MQ == "Sigmoidal") {
+            arrayParameters.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});            
+
+            int cols = modelTableParameters.getColumnCount();
+            int rows = modelTableParameters.getRowCount();
+
+            System.out.println("Cols: " + cols);
+            System.out.println("Rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(modelTableParameters.getValueAt(i, j));
+                    System.out.println();
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                }
+            }
+            tableParameters.setModel(modelTableParameters);
+            }
+        
+        if (MQ == "Gaussian double") {
+            arrayParameters.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});            
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});            
+            modelTableParameters.addRow(new Object[]{"C:", "0.0"});            
+            modelTableParameters.addRow(new Object[]{"D:", "0.0"});            
+
+            int cols = modelTableParameters.getColumnCount();
+            int rows = modelTableParameters.getRowCount();
+
+            System.out.println("Cols: " + cols);
+            System.out.println("Rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(modelTableParameters.getValueAt(i, j));
+                    System.out.println();
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                }
+            }
+            tableParameters.setModel(modelTableParameters);
+            }
+                
+        if (MQ == "Cosine") {
+            arrayParameters.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});            
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});                        
+
+            int cols = modelTableParameters.getColumnCount();
+            int rows = modelTableParameters.getRowCount();
+
+            System.out.println("Cols: " + cols);
+            System.out.println("Rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(modelTableParameters.getValueAt(i, j));
+                    System.out.println();
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                }
+            }
+            tableParameters.setModel(modelTableParameters);
+            }
+        
+        if (MQ == "Difference of sigmoidals") {
+            arrayParameters.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});            
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});                        
+            modelTableParameters.addRow(new Object[]{"C:", "0.0"});                        
+            modelTableParameters.addRow(new Object[]{"D:", "0.0"});                        
+
+            int cols = modelTableParameters.getColumnCount();
+            int rows = modelTableParameters.getRowCount();
+
+            System.out.println("Cols: " + cols);
+            System.out.println("Rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(modelTableParameters.getValueAt(i, j));
+                    System.out.println();
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                }
+            }
+            tableParameters.setModel(modelTableParameters);
+            }
+        
+        System.out.print(arrayParameters);
     }
-    
+
     private void fuzzifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuzzifierActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fuzzifierActionPerformed
@@ -346,7 +512,13 @@ public class createInput extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void newLQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLQButtonActionPerformed
-        A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY()).agregarVariableEntrada(nameVariable.getText());
+        String nameLQ = LQName.getText();
+        String typeLQ = comboBoxMembershipFunction.getSelectedItem().toString();
+        
+        variableLinguistica v= new variableLinguistica();
+        v.setNombreVL(nameVariable.getText());
+        
+        v.agregarCalificador(nameLQ, typeLQ, null);
         
 //        newLQInput windowNewLQ = new newLQInput(this, true);
 //        windowNewLQ.setLocationRelativeTo(null);
@@ -355,9 +527,7 @@ public class createInput extends javax.swing.JDialog {
 
     private void buttonGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGraphActionPerformed
 
-        
 //        String variableLista = listLinguisticQualifiers.getSelectedValue().toString();
-
 
     }//GEN-LAST:event_buttonGraphActionPerformed
 
@@ -372,7 +542,7 @@ public class createInput extends javax.swing.JDialog {
 
     private void comboBoxMembershipFunctionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMembershipFunctionActionPerformed
         String FQSelected = comboBoxMembershipFunction.getSelectedItem().toString();
-        System.out.println("Algo:"+ FQSelected);        
+        System.out.println("Algo:" + FQSelected);
         parametersMembershipFunction(FQSelected);
     }//GEN-LAST:event_comboBoxMembershipFunctionActionPerformed
 
