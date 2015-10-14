@@ -6,12 +6,15 @@
 package fuzzynetswing;
 
 import static fuzzynetswing.MenuOverview.A;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.VL;
 import model.variableLinguistica;
+import sun.awt.windows.ThemeReader;
 
 /**
  *
@@ -23,9 +26,14 @@ public class createInput extends javax.swing.JDialog {
      * Creates new form createVLInputNet
      */
     //Instance of the parent window
-    
-    ArrayList<String> arrayParameters = new ArrayList<String>();        
-    
+    ArrayList<String> arrayParameters = new ArrayList<String>();
+    ArrayList<String> arrayEjemplo = new ArrayList<String>();
+    ArrayList<Double> arrayParametersLQ = new ArrayList<Double>();
+    boolean onOff = false;
+
+    public createInput() {
+    }
+
     private MenuOverview principalWindow = (MenuOverview) this.getParent();
 
     public createInput(java.awt.Frame parent, boolean modal) {
@@ -312,9 +320,43 @@ public class createInput extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public String parseParameters(String Parameter) {
+        String parameterLQ = "";
+
+        if (Parameter == "Triangular") {
+            parameterLQ = "trian";
+        }
+
+        if (Parameter == "Trapetzoidal") {
+            parameterLQ = "trape";
+        }
+
+        if (Parameter == "Gauss") {
+            parameterLQ = "gauss";
+        }
+
+        if (Parameter == "Generalized bell") {
+            parameterLQ = "gbell";
+        }
+
+        if (Parameter == "Sigmoidal") {
+            parameterLQ = "sigm";
+        }
+
+        if (Parameter == "Gaussian double") {
+            parameterLQ = "No existe";
+        }
+
+        if (Parameter == "Difference of sigmoidals") {
+            parameterLQ = "No existe";
+        }
+
+        return parameterLQ;
+    }
+
     public void parametersMembershipFunction(String MQ) {
 
-        DefaultTableModel modelTableParameters = new DefaultTableModel();
+        final DefaultTableModel modelTableParameters = new DefaultTableModel();
 
         modelTableParameters.addColumn("Parameters");
         modelTableParameters.addColumn("Values");
@@ -322,6 +364,7 @@ public class createInput extends javax.swing.JDialog {
 
         if (MQ == "Triangular") {
             arrayParameters.clear();
+            arrayParametersLQ.clear();
             modelTableParameters.addRow(new Object[]{"A:", "0.0"});
             modelTableParameters.addRow(new Object[]{"B:", "0.0"});
             modelTableParameters.addRow(new Object[]{"C:", "0.0"});
@@ -336,16 +379,15 @@ public class createInput extends javax.swing.JDialog {
                 for (int j = 0; j < cols; j++) {
                     System.out.print(modelTableParameters.getValueAt(i, j));
                     System.out.println();
-                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i, j));
                 }
             }
             tableParameters.setModel(modelTableParameters);
-            }
-                
-        
+        }
 
         if (MQ == "Trapetzoidal") {
             arrayParameters.clear();
+            arrayParametersLQ.clear();
             modelTableParameters.addRow(new Object[]{"A:", "0.0"});
             modelTableParameters.addRow(new Object[]{"B:", "0.0"});
             modelTableParameters.addRow(new Object[]{"C:", "0.0"});
@@ -361,14 +403,15 @@ public class createInput extends javax.swing.JDialog {
                 for (int j = 0; j < cols; j++) {
                     System.out.print(modelTableParameters.getValueAt(i, j));
                     System.out.println();
-                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i, j));
                 }
             }
             tableParameters.setModel(modelTableParameters);
-            }
-        
+        }
+
         if (MQ == "Gauss") {
             arrayParameters.clear();
+            arrayParametersLQ.clear();
             modelTableParameters.addRow(new Object[]{"A:", "0.0"});
             modelTableParameters.addRow(new Object[]{"B:", "0.0"});
 
@@ -382,14 +425,15 @@ public class createInput extends javax.swing.JDialog {
                 for (int j = 0; j < cols; j++) {
                     System.out.print(modelTableParameters.getValueAt(i, j));
                     System.out.println();
-                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i, j));
                 }
             }
             tableParameters.setModel(modelTableParameters);
-            }
-        
+        }
+
         if (MQ == "Generalized bell") {
             arrayParameters.clear();
+            arrayParametersLQ.clear();
             modelTableParameters.addRow(new Object[]{"A:", "0.0"});
             modelTableParameters.addRow(new Object[]{"B:", "0.0"});
             modelTableParameters.addRow(new Object[]{"C:", "0.0"});
@@ -404,17 +448,17 @@ public class createInput extends javax.swing.JDialog {
                 for (int j = 0; j < cols; j++) {
                     System.out.print(modelTableParameters.getValueAt(i, j));
                     System.out.println();
-                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i, j));
                 }
             }
             tableParameters.setModel(modelTableParameters);
-            }
-        
-        
+        }
+
         if (MQ == "Sigmoidal") {
             arrayParameters.clear();
+            arrayParametersLQ.clear();
             modelTableParameters.addRow(new Object[]{"A:", "0.0"});
-            modelTableParameters.addRow(new Object[]{"B:", "0.0"});            
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});
 
             int cols = modelTableParameters.getColumnCount();
             int rows = modelTableParameters.getRowCount();
@@ -426,18 +470,19 @@ public class createInput extends javax.swing.JDialog {
                 for (int j = 0; j < cols; j++) {
                     System.out.print(modelTableParameters.getValueAt(i, j));
                     System.out.println();
-                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i, j));
                 }
             }
             tableParameters.setModel(modelTableParameters);
-            }
-        
+        }
+
         if (MQ == "Gaussian double") {
             arrayParameters.clear();
-            modelTableParameters.addRow(new Object[]{"A:", "0.0"});            
-            modelTableParameters.addRow(new Object[]{"B:", "0.0"});            
-            modelTableParameters.addRow(new Object[]{"C:", "0.0"});            
-            modelTableParameters.addRow(new Object[]{"D:", "0.0"});            
+            arrayParametersLQ.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"C:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"D:", "0.0"});
 
             int cols = modelTableParameters.getColumnCount();
             int rows = modelTableParameters.getRowCount();
@@ -449,16 +494,17 @@ public class createInput extends javax.swing.JDialog {
                 for (int j = 0; j < cols; j++) {
                     System.out.print(modelTableParameters.getValueAt(i, j));
                     System.out.println();
-                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i, j));
                 }
             }
             tableParameters.setModel(modelTableParameters);
-            }
-                
+        }
+
         if (MQ == "Cosine") {
             arrayParameters.clear();
-            modelTableParameters.addRow(new Object[]{"A:", "0.0"});            
-            modelTableParameters.addRow(new Object[]{"B:", "0.0"});                        
+            arrayParametersLQ.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});
 
             int cols = modelTableParameters.getColumnCount();
             int rows = modelTableParameters.getRowCount();
@@ -470,18 +516,19 @@ public class createInput extends javax.swing.JDialog {
                 for (int j = 0; j < cols; j++) {
                     System.out.print(modelTableParameters.getValueAt(i, j));
                     System.out.println();
-                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i, j));
                 }
             }
             tableParameters.setModel(modelTableParameters);
-            }
-        
+        }
+
         if (MQ == "Difference of sigmoidals") {
             arrayParameters.clear();
-            modelTableParameters.addRow(new Object[]{"A:", "0.0"});            
-            modelTableParameters.addRow(new Object[]{"B:", "0.0"});                        
-            modelTableParameters.addRow(new Object[]{"C:", "0.0"});                        
-            modelTableParameters.addRow(new Object[]{"D:", "0.0"});                        
+            arrayParametersLQ.clear();
+            modelTableParameters.addRow(new Object[]{"A:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"B:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"C:", "0.0"});
+            modelTableParameters.addRow(new Object[]{"D:", "0.0"});
 
             int cols = modelTableParameters.getColumnCount();
             int rows = modelTableParameters.getRowCount();
@@ -493,13 +540,19 @@ public class createInput extends javax.swing.JDialog {
                 for (int j = 0; j < cols; j++) {
                     System.out.print(modelTableParameters.getValueAt(i, j));
                     System.out.println();
-                    arrayParameters.add((String) modelTableParameters.getValueAt(i,j));                    
+                    arrayParameters.add((String) modelTableParameters.getValueAt(i, j));
                 }
             }
             tableParameters.setModel(modelTableParameters);
-            }
-        
+        }
+
         System.out.print(arrayParameters);
+
+        for (int h = 1; h < arrayParameters.size(); h++, h++) {
+            arrayParametersLQ.add(Double.parseDouble(arrayParameters.get(h)));
+        }
+
+        System.out.print(arrayParametersLQ);
     }
 
     private void fuzzifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuzzifierActionPerformed
@@ -514,12 +567,45 @@ public class createInput extends javax.swing.JDialog {
     private void newLQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLQButtonActionPerformed
         String nameLQ = LQName.getText();
         String typeLQ = comboBoxMembershipFunction.getSelectedItem().toString();
-        
-        variableLinguistica v= new variableLinguistica();
-        v.setNombreVL(nameVariable.getText());
-        
-        v.agregarCalificador(nameLQ, typeLQ, null);
-        
+
+        String typeLinguisticQualifier = parseParameters(typeLQ);
+
+        int z = A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().size();
+
+        if (onOff == false) {
+
+            variableLinguistica v = new variableLinguistica();
+            v.setNombreVL(nameVariable.getText());
+
+            v.agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
+
+            A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().add(v);
+
+            onOff = true;
+        } else {
+            A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
+        }
+
+        int cols = tableParameters.getColumnCount();
+        int rows = tableParameters.getRowCount();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                arrayEjemplo.add(tableParameters.getValueAt(i, j).toString());
+            }
+        }
+
+//        for (int i = 0; i < tableParameters.getRowCount(); i++) //recorro las filas
+//        {
+//            for (int a = 0; a < tableParameters.getColumnCount(); a++) //recorro las columnas
+//            {
+//                arrayEjemplo.add(tableParameters.getValueAt(i, a).toString());
+//            }
+//        }
+        System.out.println("ARRAY EDITADO");
+        System.out.println(arrayEjemplo);
+
+//        System.out.println("calificador:" + A.getCapas().get(0).getNodos().get(0).getVLEntrada().get(0).getCalificadores().get(0).getFm().getParametros().get(2));
 //        newLQInput windowNewLQ = new newLQInput(this, true);
 //        windowNewLQ.setLocationRelativeTo(null);
 //        windowNewLQ.setVisible(true);
@@ -532,7 +618,12 @@ public class createInput extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonGraphActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY()).agregarVariableEntrada(nameVariable.getText());
+
+        if (onOff = false) {
+            variableLinguistica v = new variableLinguistica();
+            v.setNombreVL(nameVariable.getText());
+        }
+
         dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 

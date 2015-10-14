@@ -25,10 +25,10 @@ public class main {
 		A.capas.get(0).anadirNodo(0, "Amenaza");
 		//Entrada
 		A.capas.get(0).nodos.get(0).agregarVariableEntrada("PrecipitacionLLuviosa");
-		A.capas.get(0).nodos.get(0).VLEntrada.get(0).agregarCalificador("alta", "Piece-wise linear", bajo);
+//		A.capas.get(0).nodos.get(0).VLEntrada.get(0).agregarCalificador("alta", "Piece-wise linear", bajo);
 		//Salida
 		A.getCapas().get(0).getNodos().get(0).agregarVariableSalida("amenaza", "COG");
-		A.capas.get(0).nodos.get(0).VLSalida.get(0).agregarCalificador("alta", "Piece-wise linear", bajo);
+//		A.capas.get(0).nodos.get(0).VLSalida.get(0).agregarCalificador("alta", "Piece-wise linear", bajo);
 		//Regla
 		A.getCapas().get(0).getNodos().get(0).getSIF().agregarRegla();
 		A.getCapas().get(0).getNodos().get(0).getSIF().getReglas().get(0).agregarAntecedente("alta", "PrecipitacionLLuviosa", "");
