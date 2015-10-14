@@ -165,7 +165,7 @@ public class createInput extends javax.swing.JDialog {
 
         jLabel4.setText("Name LQ: ");
 
-        comboBoxMembershipFunction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Triangular", "Trapetzoidal", "Gauss", "Generalized bell", "Sigmoidal", "Gaussian double", "Cosine", "Difference of sigmoidals", "Piece-wise linear" }));
+        comboBoxMembershipFunction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Select LQ-", "Triangular", "Trapetzoidal", "Gauss", "Generalized bell", "Sigmoidal", "Gaussian double", "Cosine", "Difference of sigmoidals", "Piece-wise linear" }));
         comboBoxMembershipFunction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxMembershipFunctionActionPerformed(evt);
@@ -364,6 +364,7 @@ public class createInput extends javax.swing.JDialog {
 
         if (MQ == "Triangular") {
             arrayParameters.clear();
+            arrayParametersLQ.clear();
             arrayParametersLQ.clear();
             modelTableParameters.addRow(new Object[]{"A:", "0.0"});
             modelTableParameters.addRow(new Object[]{"B:", "0.0"});
@@ -565,50 +566,47 @@ public class createInput extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void newLQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLQButtonActionPerformed
-        String nameLQ = LQName.getText();
-        String typeLQ = comboBoxMembershipFunction.getSelectedItem().toString();
 
-        String typeLinguisticQualifier = parseParameters(typeLQ);
-
-        int z = A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().size();
-
-        if (onOff == false) {
-
-            variableLinguistica v = new variableLinguistica();
-            v.setNombreVL(nameVariable.getText());
-
-            v.agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
-
-            A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().add(v);
-
-            onOff = true;
+        if (LQName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "The linguistic qualifier field is empty");
         } else {
-            A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
-        }
+            if (comboBoxMembershipFunction.getSelectedItem() == "-Select LQ-") {
+                JOptionPane.showMessageDialog(this, "The membership function field is empty");
+            } else {
+                String nameLQ = LQName.getText();
+                String typeLQ = comboBoxMembershipFunction.getSelectedItem().toString();
 
-        int cols = tableParameters.getColumnCount();
-        int rows = tableParameters.getRowCount();
+                String typeLinguisticQualifier = parseParameters(typeLQ);
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                arrayEjemplo.add(tableParameters.getValueAt(i, j).toString());
+                int z = A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().size();
+
+                if (onOff == false) {
+
+                    variableLinguistica v = new variableLinguistica();
+                    v.setNombreVL(nameVariable.getText());
+
+                    v.agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
+
+                    A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().add(v);
+
+                    onOff = true;
+                } else {
+                    A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
+                }
+
+                int cols = tableParameters.getColumnCount();
+                int rows = tableParameters.getRowCount();
+
+                for (int i = 0; i < rows; i++) {
+                    for (int j = 0; j < cols; j++) {
+                        arrayEjemplo.add(tableParameters.getValueAt(i, j).toString());
+                    }
+                }
+                
+                System.out.println("ARRAY EDITADO");
+                System.out.println(arrayEjemplo);
             }
         }
-
-//        for (int i = 0; i < tableParameters.getRowCount(); i++) //recorro las filas
-//        {
-//            for (int a = 0; a < tableParameters.getColumnCount(); a++) //recorro las columnas
-//            {
-//                arrayEjemplo.add(tableParameters.getValueAt(i, a).toString());
-//            }
-//        }
-        System.out.println("ARRAY EDITADO");
-        System.out.println(arrayEjemplo);
-
-//        System.out.println("calificador:" + A.getCapas().get(0).getNodos().get(0).getVLEntrada().get(0).getCalificadores().get(0).getFm().getParametros().get(2));
-//        newLQInput windowNewLQ = new newLQInput(this, true);
-//        windowNewLQ.setLocationRelativeTo(null);
-//        windowNewLQ.setVisible(true);
     }//GEN-LAST:event_newLQButtonActionPerformed
 
     private void buttonGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGraphActionPerformed
