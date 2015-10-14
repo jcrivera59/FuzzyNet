@@ -365,7 +365,6 @@ public class createInput extends javax.swing.JDialog {
         if (MQ == "Triangular") {
             arrayParameters.clear();
             arrayParametersLQ.clear();
-            arrayParametersLQ.clear();
             modelTableParameters.addRow(new Object[]{"A:", "0.0"});
             modelTableParameters.addRow(new Object[]{"B:", "0.0"});
             modelTableParameters.addRow(new Object[]{"C:", "0.0"});
@@ -546,14 +545,30 @@ public class createInput extends javax.swing.JDialog {
             }
             tableParameters.setModel(modelTableParameters);
         }
+    }
 
-        System.out.print(arrayParameters);
+    public void addToFinalArray() {
+        int cols = tableParameters.getColumnCount();
+        int rows = tableParameters.getRowCount();
+        
+        arrayParameters.clear();
+        arrayParametersLQ.clear();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                arrayParameters.add(tableParameters.getValueAt(i, j).toString());
+            }
+        }
 
         for (int h = 1; h < arrayParameters.size(); h++, h++) {
             arrayParametersLQ.add(Double.parseDouble(arrayParameters.get(h)));
         }
 
         System.out.print(arrayParametersLQ);
+
+        System.out.println("ARRAY Antiguo"+arrayParameters);
+        System.out.println("ARRAY Nuevo"+arrayParametersLQ);
+        
     }
 
     private void fuzzifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuzzifierActionPerformed
@@ -585,26 +600,17 @@ public class createInput extends javax.swing.JDialog {
                     variableLinguistica v = new variableLinguistica();
                     v.setNombreVL(nameVariable.getText());
 
+                    addToFinalArray();
+                    
                     v.agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
-
                     A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().add(v);
 
                     onOff = true;
                 } else {
+                    addToFinalArray();
                     A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
                 }
 
-                int cols = tableParameters.getColumnCount();
-                int rows = tableParameters.getRowCount();
-
-                for (int i = 0; i < rows; i++) {
-                    for (int j = 0; j < cols; j++) {
-                        arrayEjemplo.add(tableParameters.getValueAt(i, j).toString());
-                    }
-                }
-                
-                System.out.println("ARRAY EDITADO");
-                System.out.println(arrayEjemplo);
             }
         }
     }//GEN-LAST:event_newLQButtonActionPerformed
@@ -631,7 +637,6 @@ public class createInput extends javax.swing.JDialog {
 
     private void comboBoxMembershipFunctionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMembershipFunctionActionPerformed
         String FQSelected = comboBoxMembershipFunction.getSelectedItem().toString();
-        System.out.println("Algo:" + FQSelected);
         parametersMembershipFunction(FQSelected);
     }//GEN-LAST:event_comboBoxMembershipFunctionActionPerformed
 
