@@ -42,38 +42,43 @@ public class MenuOverview extends javax.swing.JFrame {
     int contador9 = 0;
     int contador10 = 0;
 
-    //instance Administrator
+    //Instance Administrator
     static Administrador A = new Administrador();
 
     //Combobox value to static variable    
-
     ArrayList<String> arrayNodesNames = new ArrayList<String>();
 
+    //Constructor that initializes the main window
     public MenuOverview() {
         try {
             UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
         } catch (Exception ex) {
         }
-
         initComponents();
         addNode.setEnabled(false);
-        System.out.println("Entró a MenuOverview");
-        
+        newInputButton.setEnabled(false);
+        newOutputButton.setEnabled(false);        
     }
 
+    /**
+     *Method responsible for creating the network 
+     *and assign the name of the network 
+     *Administrador object     
+     */
     public Administrador createNetwork(String nameNetwork) {
-        System.out.println("VARIABLE: " + nameNetwork);
-
         A.setNombreRed(nameNetwork);
-
-        textNameNetwork.setEnabled(false);
-        buttonCreateNetwork.setEnabled(false);
         addNode.setEnabled(true);
+        newInputButton.setEnabled(true);
+        newOutputButton.setEnabled(true);
         configuration(1, 1);
         return A;
     }
 
-    //Method 
+    /**
+     *Method responsible for setting the grid 
+     *according to the number of layers that 
+     * the user selects.      
+     */
     public void configuration(int x, int y) {
         comboBoxNode.removeAllItems();
         x = 10;
@@ -97,27 +102,24 @@ public class MenuOverview extends javax.swing.JFrame {
                 cantidad = y;
             }
         }
-
         for (int zz = 0; zz < cantidad; zz++) {
             comboBoxNode.addItem(zz + 1);
-//            comboBoxLayers.addItem(zz + 1);
         }
-
         panelLayer.updateUI();
-
     }
-    
+
     void mouseactionlabel(final JLabel node, final String nameNode, final int posX, final int posY) {
         node.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                System.out.println("El nodo seleccionado es:"+ nameNode);                
-                System.out.println("PosX:"+ posX+ "PosY:" +posY);                
+                
+                System.out.println("El nodo seleccionado es:" + nameNode);
+                System.out.println("PosX:" + posX + "PosY:" + posY);
                 A.setPosX(posX);
                 A.setPosY(posY);
                 A.setNameNodeSeleccionado(nameNode);
-                System.out.println("Admin Name Node:"+ nameNode);                
-                System.out.println("Admin PosX:"+ posX+ "PosY:" +posY);                
+                System.out.println("Admin Name Node:" + nameNode);
+                System.out.println("Admin PosX:" + posX + "PosY:" + posY);
             }
 
             public void mouseEntered(MouseEvent arg0) {
@@ -126,14 +128,16 @@ public class MenuOverview extends javax.swing.JFrame {
             public void mouseExited(MouseEvent arg0) {
             }
 
-            public void mousePressed(MouseEvent arg0) {
+            public void mousePressed(MouseEvent arg0) {                
+                Layouts[posY][posX].setBackground(new java.awt.Color(0, 204 + (10), 255));
+                Border matte = BorderFactory.createMatteBorder(0, 1, 0, 1, Color.BLACK);
+                Layouts[posY][posX].setBorder(matte);
             }
 
             public void mouseReleased(MouseEvent arg0) {
             }
         });
     }
-    
 
     public boolean createNode(String nameNode) {
 
@@ -156,7 +160,7 @@ public class MenuOverview extends javax.swing.JFrame {
 
             //Sections nodes added to layers
             //WHERE
-            //Number of the layers is VARIABLE and the row is CONTADOR
+            //Number of the LAYER(X) is VARIABLE and the ROW(Y) is CONTADOR
             //Layout 1            
             if (variable == 1) {
                 if (contador1 < 10) {
@@ -173,21 +177,14 @@ public class MenuOverview extends javax.swing.JFrame {
 
                     A.getCapas().get(0).anadirNodo(contador1, nameNode);
                     contador1++;
-
-                    //pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaa jhoooooooooooooooooooooooooooooooooooooooooooooooooooooooon
-//                    for (int y = 0; y < A.getCapas().get(0).getNodos().size(); y++) {
-//                        System.out.print(A.getCapas().get(0).getNodos().get(y).getNombreNodo());
-//                    }
                     
-                    mouseactionlabel(node, nameNode, variable-1, contador1);
+                    mouseactionlabel(node, nameNode, variable - 1, contador1);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
                 }
 
             }
-            
-            
 
             //Layout 2            
             if (variable == 2) {
@@ -204,10 +201,10 @@ public class MenuOverview extends javax.swing.JFrame {
                     System.out.println("ROW:" + contador2);
 
                     A.getCapas().get(1).anadirNodo(contador2, nameNode);
-                    
+
                     contador2++;
-                    
-                    mouseactionlabel(node, nameNode, variable-1, contador2);                                        
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador2);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -231,8 +228,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(2).anadirNodo(contador3, nameNode);
 
                     contador3++;
-                    
-                    mouseactionlabel(node, nameNode, variable-1, contador3);
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador3);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -256,8 +253,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(3).anadirNodo(contador4, nameNode);
 
                     contador4++;
-                    
-                    mouseactionlabel(node, nameNode, variable-1, contador4);
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador4);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -281,8 +278,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(4).anadirNodo(contador5, nameNode);
 
                     contador5++;
-                    
-                    mouseactionlabel(node, nameNode, variable-1, contador5);
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador5);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -306,8 +303,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(5).anadirNodo(contador6, nameNode);
 
                     contador6++;
-                    
-                    mouseactionlabel(node, nameNode, variable-1, contador6);
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador6);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -331,8 +328,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(6).anadirNodo(contador7, nameNode);
 
                     contador7++;
-                    
-                    mouseactionlabel(node, nameNode, variable-1, contador7);
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador7);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -356,8 +353,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(7).anadirNodo(contador8, nameNode);
 
                     contador8++;
-                    
-                    mouseactionlabel(node, nameNode, variable-1, contador8);
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador8);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -381,8 +378,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(8).anadirNodo(contador9, nameNode);
 
                     contador9++;
-                    
-                    mouseactionlabel(node, nameNode,  variable-1, contador9);
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador9);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -406,8 +403,8 @@ public class MenuOverview extends javax.swing.JFrame {
                     A.getCapas().get(9).anadirNodo(contador10, nameNode);
 
                     contador10++;
-                    
-                    mouseactionlabel(node, nameNode, variable-1, contador10);
+
+                    mouseactionlabel(node, nameNode, variable - 1, contador10);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Maximum numbers of nodes is 10");
@@ -415,8 +412,6 @@ public class MenuOverview extends javax.swing.JFrame {
             }
 
         }
-
-        
 
         return true;
     }
@@ -452,8 +447,6 @@ public class MenuOverview extends javax.swing.JFrame {
         textNameNode = new javax.swing.JTextField();
         addNode = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
-        textNameNetwork = new javax.swing.JTextField();
-        buttonCreateNetwork = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         PanelInputs = new javax.swing.JPanel();
         newInputButton = new javax.swing.JButton();
@@ -501,6 +494,7 @@ public class MenuOverview extends javax.swing.JFrame {
         EditAboutUs = new javax.swing.JMenuItem();
 
         NodePopup.setComponentPopupMenu(NodePopup);
+        NodePopup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         InputPopUp.setText("Input");
 
@@ -651,21 +645,6 @@ public class MenuOverview extends javax.swing.JFrame {
         });
         jToolBar1.add(addNode);
         jToolBar1.add(jSeparator6);
-
-        textNameNetwork.setToolTipText("Network name");
-        textNameNetwork.setMaximumSize(new java.awt.Dimension(100, 20));
-        jToolBar1.add(textNameNetwork);
-
-        buttonCreateNetwork.setText("Create Network");
-        buttonCreateNetwork.setFocusable(false);
-        buttonCreateNetwork.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonCreateNetwork.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        buttonCreateNetwork.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCreateNetworkActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(buttonCreateNetwork);
 
         javax.swing.GroupLayout PanelToolbarLayout = new javax.swing.GroupLayout(PanelToolbar);
         PanelToolbar.setLayout(PanelToolbarLayout);
@@ -1167,13 +1146,6 @@ public class MenuOverview extends javax.swing.JFrame {
         windowCreateOutput.setVisible(true);
     }//GEN-LAST:event_NewOutputActionPerformed
 
-    private void buttonCreateNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCreateNetworkActionPerformed
-        // TODO add your handling code here:
-        String nameNetwork;
-        nameNetwork = textNameNetwork.getText();
-        createNetwork(nameNetwork);
-    }//GEN-LAST:event_buttonCreateNetworkActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1253,7 +1225,6 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JMenuItem Rules;
     private javax.swing.JButton Save;
     private javax.swing.JButton addNode;
-    private javax.swing.JButton buttonCreateNetwork;
     private javax.swing.JComboBox comboBoxNode;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1277,7 +1248,6 @@ public class MenuOverview extends javax.swing.JFrame {
     private javax.swing.JButton newInputButton;
     private javax.swing.JButton newOutputButton;
     public static javax.swing.JPanel panelLayer;
-    private javax.swing.JTextField textNameNetwork;
     private javax.swing.JTextField textNameNode;
     // End of variables declaration//GEN-END:variables
 }

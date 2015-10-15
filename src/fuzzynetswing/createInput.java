@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +31,7 @@ public class createInput extends javax.swing.JDialog {
     ArrayList<String> arrayParameters = new ArrayList<String>();
     ArrayList<String> arrayEjemplo = new ArrayList<String>();
     ArrayList<Double> arrayParametersLQ = new ArrayList<Double>();
+    ArrayList<String> arrayComboQualifiers = new ArrayList<>();
     boolean onOff = false;
 
     public createInput() {
@@ -41,24 +43,6 @@ public class createInput extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         nameNode.setText(A.getNameNodeSeleccionado());
-
-        
-//        
-//        ArrayList<String> arrayComboQualifiers = new ArrayList<>();
-//        
-//        arrayComboQualifiers.add("puta1");
-//        arrayComboQualifiers.add("puta2");
-//        
-//        int z = A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().size();
-//
-//        for (int c = 0; c < A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).getCalificadores().size(); c++) {
-//            arrayComboQualifiers.add(A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).getCalificadores().get(c).getNombreCL());
-//        }        
-//        
-//        DefaultTableModel modelComboQualifiers = new DefaultTableModel();
-//        
-//        modelComboQualifiers.addColumn(arrayComboQualifiers);
-//        comboLQ.setModel((ComboBoxModel) modelComboQualifiers);
     }
 
     /**
@@ -148,7 +132,7 @@ public class createInput extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(buttonGraph)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,12 +306,14 @@ public class createInput extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jSeparator1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,6 +361,29 @@ public class createInput extends javax.swing.JDialog {
         }
 
         return parameterLQ;
+    }
+    
+    public void fillComboBoxQualifiers(){                               
+        arrayComboQualifiers.clear();
+        
+        
+        int z = A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().size();
+        
+        for (int c = 0; c < A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).getCalificadores().size(); c++) {
+            arrayComboQualifiers.add(A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).getCalificadores().get(c).getNombreCL());
+        }        
+        
+        DefaultComboBoxModel modelComboQualifiers = new DefaultComboBoxModel();
+                
+        for(int j=0; j<arrayComboQualifiers.size(); j++){
+        modelComboQualifiers.addElement(arrayComboQualifiers.get(j));         
+        }
+        
+        System.out.println("ARRAYCOMBO:"+ arrayComboQualifiers);
+        
+        comboLQ.setModel(modelComboQualifiers);
+        
+//        comboLQ.addItem(arrayComboQualifiers);
     }
 
     public void parametersMembershipFunction(String MQ) {
@@ -629,9 +638,13 @@ public class createInput extends javax.swing.JDialog {
                     A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().add(v);
 
                     onOff = true;
+                    nameVariable.setEnabled(false);
+                    fillComboBoxQualifiers();
                 } else {
                     addToFinalArray();
-                    A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);
+                    A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().get(z - 1).agregarCalificador(nameLQ, typeLinguisticQualifier, arrayParametersLQ);                    
+                    fillComboBoxQualifiers();
+                    nameVariable.setEnabled(false);
                 }
 
             }
@@ -649,6 +662,9 @@ public class createInput extends javax.swing.JDialog {
         if (onOff = false) {
             variableLinguistica v = new variableLinguistica();
             v.setNombreVL(nameVariable.getText());
+            
+            A.getCapas().get(A.getPosX()).getNodos().get(A.getPosY() - 1).getVLEntrada().add(v);
+            
         }
 
         dispose();
